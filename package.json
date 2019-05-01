@@ -5,14 +5,16 @@
   "author": "Kyle Holzinger <kylelholzinger@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node webpack-server.js"
+    "start": "nodemon --exec babel-node server/webpack-server.js"
   },
   "dependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "express": "^4.16.4",
+    "nodemon": "^1.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "webpack": "^4.30.0",
