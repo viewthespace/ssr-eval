@@ -2,4 +2,4 @@ import React from 'react'
 import { hydrate } from 'react-dom'
 import { App } from './App'
 
-hydrate(<App />, document.querySelector('#root'))
+hydrate(<App count={window.__STATE__.count} />, document.querySelector('#root'))

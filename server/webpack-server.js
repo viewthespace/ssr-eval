@@ -10,6 +10,9 @@ import { renderToString } from 'react-dom/server'
 
 const compiler = webpack(webpackOptions)
 const app = express()
+const state = {
+  count: 129837
+}
 
 app.use(middleware(compiler, {}))
 
@@ -22,11 +25,13 @@ app.get('/listings', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  const renderedApp = renderToString(<App />)
+  const renderedApp = renderToString(<App count={state.count} />)
 
   const rawHtml = fs.readFileSync(path.join(__dirname, 'index.html')).toString()
 
-  const renderedHtml = rawHtml.replace('{{ content }}', renderedApp)
+  const renderedHtml = rawHtml
+    .replace('{{ content }}', renderedApp)
+    .replace('{{ initialState }}', JSON.stringify(state))
 
   res.send(renderedHtml)
 })

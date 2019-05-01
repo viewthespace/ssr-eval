@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-export const App = () => {
-  const [count, setCount] = useState(0)
+export const App = ({ count: rawCount = 0 }) => {
+  const [count, setCount] = useState(rawCount)
 
   return (
     <>

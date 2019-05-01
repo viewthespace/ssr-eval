@@ -5,6 +5,9 @@
   <body>
     <div id="root">{{ content }}</div>
 
+    <script>
+      window.__STATE__ = {{ initialState }}
+    </script>
     <script src="bundle.js"></script>
   </body>
 </html>
