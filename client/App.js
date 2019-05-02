@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 
-export const App = ({ count: rawCount = 0 }) => {
+const _App = ({ count: rawCount = 0 }) => {
   const [count, setCount] = useState(rawCount)
+
+  console.log(rawCount)
 
   return (
     <>
@@ -11,3 +14,5 @@ export const App = ({ count: rawCount = 0 }) => {
     </>
   )
 }
+
+export const App = connect(({ count }) => ({ count }))(_App)

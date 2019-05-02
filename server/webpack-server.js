@@ -8,6 +8,10 @@ import fs from 'fs'
 import { App } from '../client/App'
 import { renderToString } from 'react-dom/server'
 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import counterApp from '../client/reducers'
+
 const compiler = webpack(webpackOptions)
 const app = express()
 const state = {
@@ -25,13 +29,21 @@ app.get('/listings', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  const renderedApp = renderToString(<App count={state.count} />)
+  const store = createStore(counterApp, state)
+
+  const renderedApp = renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+
+  const finalState = store.getState()
 
   const rawHtml = fs.readFileSync(path.join(__dirname, 'index.html')).toString()
 
   const renderedHtml = rawHtml
     .replace('{{ content }}', renderedApp)
-    .replace('{{ initialState }}', JSON.stringify(state))
+    .replace('{{ initialState }}', JSON.stringify(finalState))
 
   res.send(renderedHtml)
 })
