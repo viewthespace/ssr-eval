@@ -9,8 +9,8 @@ import { App } from '../client/App'
 import { renderToString } from 'react-dom/server'
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import counterApp from '../client/reducers'
+import { StaticRouter } from 'react-router-dom'
+import { initStore } from '../client/store'
 
 const compiler = webpack(webpackOptions)
 const app = express()
@@ -29,12 +29,14 @@ app.get('/listings', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  const store = createStore(counterApp, state)
+  const store = initStore(state)
 
   const renderedApp = renderToString(
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <StaticRouter location={req.url}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </StaticRouter>
   )
 
   const finalState = store.getState()
