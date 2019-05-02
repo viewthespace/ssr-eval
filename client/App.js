@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-const _App = ({ count: rawCount = 0 }) => {
-  const [count, setCount] = useState(rawCount)
-
-  console.log(rawCount)
-
+const _App = ({ store, count }) => {
   return (
     <>
       <div>hello, world!</div>
       <p>{count}</p>
-      <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+      <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>
+        Increment
+      </button>
     </>
   )
 }

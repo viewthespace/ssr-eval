@@ -13,7 +13,7 @@ const store = createStore(counterApp, preloadedState)
 
 hydrate(
   <Provider store={store}>
-    <App />
+    <App store={store} />
   </Provider>,
   document.querySelector('#root')
 )
