@@ -14,6 +14,12 @@ const state = {
   count: 129837
 }
 
+app.use(
+  require('prerender-node')
+    .set('prerenderServiceUrl', 'http://localhost:3000/')
+    .set('prerenderToken', 'fhy33Rc46NHXT0PkkcQn')
+)
+
 app.use(middleware(compiler, {}))
 
 // app.get("/api/user/1", (req, res) => {
@@ -36,4 +42,4 @@ app.get('*', (req, res) => {
   res.send(renderedHtml)
 })
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(8080, () => console.log('Example app listening on port 3000!'))
