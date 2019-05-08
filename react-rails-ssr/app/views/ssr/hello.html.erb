@@ -1,4 +1,4 @@
 <h1>Ssr#hello</h1>
 <p>Find me in app/views/ssr/hello.html.erb</p>
 
-<%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
+<%= react_component("HelloWorld", { greeting: "Hello from react-rails." }, { prerender: true }) %>
